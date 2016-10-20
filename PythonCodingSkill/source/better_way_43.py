@@ -33,3 +33,28 @@ def debug_logging(level):
         yield
     finally:
         logger.setLevel(old_level)
+
+print('--------------------------------')
+
+with open('tmp/my_output.txt', 'w') as f:
+    f.write("This is some data! ")
+
+
+@contextmanager
+def log_level(level, name):
+    logger = logging.getLogger(name)
+    old_level = logger.getEffectiveLevel()
+    logger.setLevel(level)
+    try:
+        yield logger
+    finally:
+        logger.setLevel(old_level)
+
+print('--------------------------------')
+with log_level(logging.DEBUG, 'my-log') as logger:
+    logger.debug('This is my message!')
+    logging.debug('This will not pprint')
+
+logger = logging.getLogger('my-log')
+logger.debug('Debug will not print')
+logger.error('Error will print')

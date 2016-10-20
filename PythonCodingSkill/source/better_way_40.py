@@ -1,3 +1,31 @@
+# 코루틴은 제너레이터를 소비하는 코드에서 send 함수를 사용하여 역으로 제너레이터 함수의 각 yield 표현식에
+# 값을 보낼 수 있게 하는 방법으로 동작한다. 제너레이터 함수는 send 함수로 보낸 값을 대응하는 yield 표현식의 결과로 받는다.
+def my_coroutine():
+    while True:
+        received = yield
+        print('Received: ', received)
+
+
+# it = my_coroutine()
+# next(it)  # 코루틴 준비함
+# it.send('First')
+# it.send('Seconde')
+
+
+# def minimize():
+#     current = yield
+#     print('current:', current)
+#     while True:
+#         value = yield current
+#         print('value:', value)
+#         current = min(value, current)
+#
+# it = minimize()
+# next(it)
+# print(it.send(10))
+# print(it.send(4))
+# print(it.send(6))
+
 from collections import namedtuple
 
 Query = namedtuple('Query', ('y', 'x'))
@@ -22,7 +50,7 @@ def count_neighbors(y, x):
         if state == ALIVE:
             count += 1
     return count
-
+#
 it = count_neighbors(10, 5)
 q1 = next(it)
 print('1 yield:', q1)
@@ -40,7 +68,7 @@ q7 = it.send(ALIVE)
 print('7 yield:', q7)
 q8 = it.send(ALIVE)
 print('8 yield:', q8)
-
+#
 try:
     count = it.send(EMPTY)
 except StopIteration as e:
@@ -78,5 +106,4 @@ class Grid(object):
     def assign(self, y, x, state):
         self.rows[y % self.height][x % self.width] = state
 
-
-
+#

@@ -1,3 +1,5 @@
+# 파이썬에서 클래스 속성의 가시성(visibility)이 공개(public)과 비공개(private) 두 유형 밖에 없다.
+
 class MyObject(object):
     def __init__(self):
         self.public_field = 5
@@ -9,6 +11,7 @@ class MyObject(object):
 
 foo = MyObject()
 assert foo.public_field == 5
+# assert foo.__private_field == 10
 
 assert foo.get_private_field() == 10
 
@@ -64,8 +67,8 @@ class MyIntegerSubclass(MyClass):
         return int(self._MyClass__value)
 
 
-# foo = MyIntegerSubclass(5)
-# foo.get_value()
+foo = MyIntegerSubclass(5)
+foo.get_value()
 
 
 class ApiClass(object):
@@ -75,6 +78,7 @@ class ApiClass(object):
     def get(self):
         return self.__value
 
+
 class Child(ApiClass):
     def __init__(self):
         super().__init__()
@@ -83,5 +87,3 @@ class Child(ApiClass):
 
 a = Child()
 print(a.get(), 'and', a._value, 'should be different')
-
-

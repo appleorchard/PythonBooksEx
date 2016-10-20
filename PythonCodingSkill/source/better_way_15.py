@@ -13,11 +13,12 @@ group = {2, 3, 5, 7}
 sort_priority(numbers, group)
 print(numbers)
 
-
+#
 # 파이썬은 클로저를 지원한다.
 # 파이썬에서 함수는 일급 객체(first-class object)이다.
 # 파이썬에는 튜플을 비교하는 특정한 규칙이 있다. 먼저 인덱스 0으로 아이템을 비교하고 그 다음으로 인덱스 1, 다음은 인덱스 2와 같이 진행한다.
 ## helper 클로저의 반환 값이 정렬 순서를 분리된 두 그룹으로 나뉘게 한 건 이 규칙 때문이다.
+
 
 def sort_priority2(numbers, group):
     found = False
@@ -58,7 +59,7 @@ class Sorter(object):
         else:
             return (1, x)
 
-
+numbers.clear()
 sorter = Sorter(group)
 numbers.sort(key=sorter)
 assert sorter.found is True

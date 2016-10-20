@@ -23,7 +23,6 @@ def load_json_key(data, key):
 # 복합문 하나로 모든 것을 처리하고 싶다면 try/except/else/finally를 사용한다.
 UNDEFINED = object()
 
-
 def divide_json(path):
     handle = open(path, 'r+')  # IOError가 일어날 수 있음
     try:
